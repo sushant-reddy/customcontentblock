@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Awesome Block</title>
+    <script type="text/javascript" src="blocksdk.js"></script>
+    <script>
+      var sdk = new window.sfdc.BlockSDK(null, null, true);
+      sdk.getData(function (data) {
+        var nextStep = data.currentStep || 0;
+        document.getElementById('step').innerText = nextStep;
+
+        setInterval(function () {
+          nextStep++;
+
+          document.getElementById('step').innerText = nextStep;
+          sdk.setContent('<p>Current Step is: <b>' + nextStep + '</b></p>');
+          sdk.setData({ currentStep: nextStep });
+        }, 2000);
+      });
+    </script>
+  </head>
+  <body>
+    <p>Current Step is: <b id="step">0</b></p> 
+  </body>
+</html>
